@@ -333,10 +333,18 @@ public:
       Event evt(etRenderContextRestored);
       HandleEvent(evt);
    }
+	
+	void OnTextInput(int inKeyCode, int inCharCode)
+	{
+      Event key(etTextInput);
+      key.code = inCharCode;
+      key.value = inKeyCode;
+      HandleEvent(key);
+	}
 
    void OnKey(int inKeyCode, int inCharCode, bool inDown)
    {
-      //__android_log_print(ANDROID_LOG_INFO, "NME", "OnKey %d %d", inCode, inDown);
+      //__android_log_print(ANDROID_LOG_INFO, "NME", "OnKey %d %d", inKeyCode, inDown);
       Event key( inDown ? etKeyDown : etKeyUp );
       key.code = inCharCode;
       key.value = inKeyCode;
@@ -878,10 +886,16 @@ JAVA_EXPORT int JNICALL Java_org_haxe_lime_Lime_onKeyChange(JNIEnv * env, jobjec
 JAVA_EXPORT int JNICALL Java_org_haxe_nme_NME_onKeyChange(JNIEnv * env, jobject obj, int code, bool down)
 #endif
 {
-   AutoHaxe haxe("onKey");
+	AutoHaxe haxe("onKey");
    #ifdef HX_LIME
    if (nme::sStage)
-      nme::sStage->OnKey(keyCode,charCode,down);
+	{
+		nme::sStage->OnKey(keyCode,charCode,down);
+		if(! down)
+		{
+			nme::sStage->OnTextInput(keyCode,charCode);
+		}
+	}
    #else
    if (nme::sStage)
       nme::sStage->OnKey(code,code,down);
