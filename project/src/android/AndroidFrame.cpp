@@ -888,7 +888,7 @@ JAVA_EXPORT int JNICALL Java_org_haxe_nme_NME_onKeyChange(JNIEnv * env, jobject 
 {
 	AutoHaxe haxe("onKey");
    #ifdef HX_LIME
-   if (nme::sStage)
+   if (nme::sStage) 
 	{
 		nme::sStage->OnKey(keyCode,charCode,down);
 		if(! down)

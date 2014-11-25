@@ -592,7 +592,7 @@ void TextField::OnTextInput(Event &inEvent)
 {
     int code = inEvent.code;
     bool shift = inEvent.flags & efShiftDown;
-
+	 printf("COde %d\n",code);
     if ( (code>27 && code<63000))
     {
          if (shift && code > 96 && code < 123)

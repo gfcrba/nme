@@ -480,7 +480,7 @@ static std::string nmeTitle;
       {
          unichar c = [string characterAtIndex: i];
          unichar v = [NMEView translateASCIICodeToKeyCode: c];
-
+			
          Event key_down(etKeyDown);
          key_down.code = c;
          key_down.value = v;
@@ -3333,6 +3333,11 @@ public:
       {
          unichar c = [string characterAtIndex: i];
          unichar v = [UIStageView translateASCIICodeToKeyCode: c];
+			
+			Event text_input(etTextInput);
+         text_input.code = c;
+         text_input.value = v;
+         mStage->OnEvent(text_input);
 
          Event key_down(etKeyDown);
          key_down.code = c;
@@ -3779,7 +3784,7 @@ void CreateMainFrame(FrameCreationCallback inCallback,
    int inWidth,int inHeight,unsigned int inFlags, const char *inTitle, Surface *inIcon )
 {
    sOnFrame = inCallback;
-   int argc = 0;// *_NSGetArgc();
+   int argc = 0;// *_NSGetArgc(); 
    char **argv = 0;// *_NSGetArgv();
 
    //sgHardwareRendering = ( inFlags & wfHardware );

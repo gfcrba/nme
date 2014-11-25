@@ -1806,6 +1806,7 @@ void Stage::HandleEvent(Event &inEvent)
    }
    if (inEvent.type==etTextInput)
    {
+		printf("COde %d\n",inEvent.code);
 		inEvent.id = mFocusObject ? mFocusObject->id : id;
 		if (mHandler)
 			mHandler(inEvent,mHandlerData);

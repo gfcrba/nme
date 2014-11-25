@@ -1258,6 +1258,7 @@ void ProcessEvent(SDL_Event &inEvent)
 			Event key(etTextInput);
 			key.value = SDL_GetScancodeFromName(inEvent.text.text);
 			key.code = SDL_GetKeyFromName(inEvent.text.text);
+			printf("SDL_TEXTINPUT KeyCode %d\n",key.code);
 			AddModStates(key.flags, SDL_GetModState());
 			sgSDLFrame->ProcessEvent(key);
 			break;
